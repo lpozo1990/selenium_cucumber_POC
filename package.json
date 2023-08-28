@@ -1,0 +1,20 @@
+{
+  "name": "my-e2e-test-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cucumber/cucumber": "^9.4.0",
+    "selenium-webdriver": "^4.11.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "chromedriver": "^116.0.0"
+  }
+}
