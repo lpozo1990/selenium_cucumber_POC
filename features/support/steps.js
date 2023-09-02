@@ -1,30 +1,44 @@
-const { Given, When, Then, AfterAll } = require('@cucumber/cucumber');
-const { Builder, By, Capabilities, Key } = require('selenium-webdriver');
-const { expect } = require('chai');
+const { Builder, By, Key } = require("selenium-webdriver");
+const { expect } = require("chai");
+const { Given, When, Then, AfterAll, Before } = require("@cucumber/cucumber");
 
-require("chromedriver");
+var driver;
 
-// driver setup
-const capabilities = Capabilities.chrome();
-capabilities.set('chromeOptions', { "w3c": false });
-const driver = new Builder().withCapabilities(capabilities).build();
-
-Given('I am on the Google search page', async function () {
-    await driver.get('http://www.google.com');
+// Inicializar el driver antes de las pruebas
+Before(async function () {
+  driver = new Builder().forBrowser("chrome").build();
 });
 
-When('I search for {string}', async function (searchTerm) {
-    const element = await driver.findElement(By.name('q'));
-    element.sendKeys(searchTerm, Key.RETURN);
-    element.submit();
+// Cerrar el navegador después de todas las pruebas
+AfterAll(async function () {
+  await driver.quit();
 });
 
-Then('the page title should start with {string}', {timeout: 60 * 1000}, async function (searchTerm) {
-    const title = await driver.getTitle();
-    const isTitleStartWithCheese = title.toLowerCase().lastIndexOf(`${searchTerm}`, 0) === 0;
-    expect(isTitleStartWithCheese).to.equal(true);
-});
+Given(
+  "I am on the Google search page",
+  { timeout: 60 * 1000 },
+  async function () {
+    await driver.get("https://www.google.com");
+  }
+);
 
-AfterAll(async function(){
-    await driver.quit();
-});
+When(
+  "I search for {string}",
+  { timeout: 60 * 1000 },
+  async function (searchTerm) {
+    const searchBox = await driver.findElement(By.name("q"));
+    await searchBox.sendKeys(searchTerm, Key.RETURN);
+  }
+);
+
+Then(
+  "the page title should start with {string}",
+  { timeout: 60 * 1000 },
+  async function (searchTerm) {
+    const pageTitle = await driver.getTitle();
+    const isTitleStartsWithSearchTerm = pageTitle
+      .toLowerCase()
+      .startsWith(searchTerm.toLowerCase());
+    expect(isTitleStartsWithSearchTerm).to.equal(true);
+  }
+);
