@@ -4,17 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js"
+    "test": "cucumber-js",
+    "clean": "rimraf dist",
+    "build": "tsc",
+    "execute": "npm run clean && npm run build && npx cucumber-js --require-module ts-node/register --require ./dist/**/*.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@cucumber/cucumber": "^9.4.0",
+    "dotenv": "^16.3.1",
     "selenium-webdriver": "^4.11.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/selenium-webdriver": "^4.1.16",
     "chai": "^4.3.8",
-    "chromedriver": "^116.0.0"
+    "chromedriver": "^116.0.0",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1"
   }
 }
