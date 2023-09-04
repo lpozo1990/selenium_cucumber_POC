@@ -16,7 +16,7 @@ This will install the necessary packages, including [Cucumber](https://cucumber.
 To execute the E2E tests, you can use the following command:
 
 ```bash
-npm test
+npm run execute
 ```
 
 This will run the Cucumber tests defined in your project. Make sure to configure your test scenarios accordingly.
