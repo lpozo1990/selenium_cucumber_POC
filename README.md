@@ -1,6 +1,6 @@
 # My E2E Test Project
 
-This is a sample End-to-End (E2E) test project showcasing the integration of Cucumber, Selenium WebDriver, and Chai for automating acceptance tests in web applications.
+This is a sample End-to-End (E2E) test project showcasing the integration of Cucumber, Selenium WebDriver, Chai, and TypeScript for automating acceptance tests in web applications.
 
 ## Installation
 
